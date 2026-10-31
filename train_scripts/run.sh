@@ -3,7 +3,7 @@ set -e
 
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
-CUDA_VISIBLE_DEVICES=0 python deepsc_main.py \
+CUDA_VISIBLE_DEVICES=0 python main.py \
 	--cr 3 \
 	--batch_size 64 \
 	--test_batch_size 50 \

@@ -15,7 +15,7 @@ if [[ -n "$RESUME" ]]; then
     resume_args=(--resume "$RESUME")
 fi
 
-CUDA_VISIBLE_DEVICES="$GPU_ID" "$PYTHON" deepsc_main.py \
+CUDA_VISIBLE_DEVICES="$GPU_ID" "$PYTHON" main.py \
     --model Inverse --use_denoise --channel awgn \
     --cr 6 --snr 18 --M 0 \
     "${resume_args[@]}" \

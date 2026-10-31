@@ -18,7 +18,7 @@ def get_args():
     parser.add_argument('--test_batch_size', default=100, type=int, help='Testing batchsize')
     parser.add_argument('--num_epochs', default=900, type=int, help='Number of taining epochs')
     parser.add_argument('--resume', default='', type=str, help='Resume from checkpoint')
-    parser.add_argument('--model', default='Inverse', type=str, help='model name')
+    parser.add_argument('--model', default='Inverse', choices=['Inverse'], type=str, help='model name')
     parser.add_argument('--channel', default='awgn', type=str, help='model name')
     parser.add_argument('--use_denoise', action='store_true', help='Use InverseNetDenoise when model is Inverse')
 
@@ -110,28 +110,28 @@ def main(args):
 
     if args.test:
         if args.loop:
-            mse, psnr = test_deepsc_loop(net, device, testloader, criterion, args.snr, args.M,
+            mse, psnr = test_idjscc_loop(net, device, testloader, criterion, args.snr, args.M,
                                         denoise_lambda=args.denoise_lambda, tx_time=args.test_hops)
         else:
-            mse, psnr = test_deepsc(net, device, testloader, criterion, args.snr, args.M,
+            mse, psnr = test_idjscc(net, device, testloader, criterion, args.snr, args.M,
                                    denoise_lambda=args.denoise_lambda)
         print('Performance on current checkpoint is MSE: %.3f , PSNR: %.3f dB' % (mse, psnr))
         exit(0)
 
     for epoch in range(start_epoch, start_epoch+args.num_epochs):
         if args.loop:
-            train_deepsc_loop(epoch, net, device, trainloader, criterion, optimizer, args.snr, args.M,
+            train_idjscc_loop(epoch, net, device, trainloader, criterion, optimizer, args.snr, args.M,
                               denoise_lambda=args.denoise_lambda, tx_time=args.train_hops, gamma=args.gamma)
         else:
-            train_deepsc(epoch, net, device, trainloader, criterion, optimizer, args.snr, args.M, denoise_lambda=args.denoise_lambda)
+            train_idjscc(epoch, net, device, trainloader, criterion, optimizer, args.snr, args.M, denoise_lambda=args.denoise_lambda)
         scheduler.step()
 
         if testloader is not None:
             if args.loop:
-                mse,psnr = test_deepsc_loop(net, device, testloader, criterion, args.snr, args.M,
+                mse,psnr = test_idjscc_loop(net, device, testloader, criterion, args.snr, args.M,
                                             denoise_lambda=args.denoise_lambda, tx_time=args.test_hops)
             else:
-                mse,psnr = test_deepsc(net, device, testloader, criterion, args.snr, args.M, denoise_lambda=args.denoise_lambda)
+                mse,psnr = test_idjscc(net, device, testloader, criterion, args.snr, args.M, denoise_lambda=args.denoise_lambda)
             if args.output_dir and args.save_ckpt:
                 if (epoch + 1) % args.save_freq == 0 or epoch + 1 == args.num_epochs:
                     print('Saving model..')

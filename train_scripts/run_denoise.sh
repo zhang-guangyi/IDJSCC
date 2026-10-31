@@ -3,7 +3,7 @@ set -e
 
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
-# CUDA_VISIBLE_DEVICES=1 python deepsc_main.py \
+# CUDA_VISIBLE_DEVICES=1 python main.py \
 # 	--cr 3 \
 # 	--batch_size 50 \
 # 	--test_batch_size 50 \
@@ -20,7 +20,7 @@ cd "$(dirname "${BASH_SOURCE[0]}")/.."
 # 	--test
 # 	--M 12
 
-# CUDA_VISIBLE_DEVICES=0 python deepsc_main.py \
+# CUDA_VISIBLE_DEVICES=0 python main.py \
 # 	--cr 3 \
 # 	--batch_size 50 \
 # 	--test_batch_size 50 \
@@ -36,7 +36,7 @@ cd "$(dirname "${BASH_SOURCE[0]}")/.."
 # 	--snr 12 \
 # 	--M 40
 
-CUDA_VISIBLE_DEVICES=1 python deepsc_main.py \
+CUDA_VISIBLE_DEVICES=1 python main.py \
 	--cr 3 \
 	--batch_size 50 \
 	--test_batch_size 50 \
@@ -51,7 +51,7 @@ CUDA_VISIBLE_DEVICES=1 python deepsc_main.py \
 	--snr 18 \
 	--M 0
 	
-# CUDA_VISIBLE_DEVICES=1 python deepsc_main.py \
+# CUDA_VISIBLE_DEVICES=1 python main.py \
 # 	--cr 3 \
 # 	--batch_size 64 \
 # 	--test_batch_size 50 \

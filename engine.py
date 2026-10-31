@@ -12,7 +12,7 @@ def _split_model_output(outputs):
         return outputs[0], None
     return outputs, None
   
-def train_deepsc(epoch, net, device, dataloader, criterion, optimizer, snr, M, denoise_lambda=0.0):
+def train_idjscc(epoch, net, device, dataloader, criterion, optimizer, snr, M, denoise_lambda=0.0):
     print('\nEpoch: %d' % epoch)
     net.train()
     train_loss = 0
@@ -51,7 +51,7 @@ def train_deepsc(epoch, net, device, dataloader, criterion, optimizer, snr, M, d
             progress_bar(batch_idx, len(dataloader), 'Loss: %.3f | SNR: %.1f | Mse: %.3f | PSNR: %.2f'
                          % (train_loss/(batch_idx+1), snr, MSE_loss/(batch_idx+1), PSNR))
 
-def test_deepsc(net, device, dataloader, criterion, snr, M, denoise_lambda=0.0):
+def test_idjscc(net, device, dataloader, criterion, snr, M, denoise_lambda=0.0):
     net.eval()
     test_loss = 0
     recon_loss_total = 0
@@ -92,7 +92,7 @@ def test_deepsc(net, device, dataloader, criterion, snr, M, denoise_lambda=0.0):
     return MSE, PSNR
 
 
-def train_deepsc_loop(epoch, net, device, dataloader, criterion, optimizer, snr, M,
+def train_idjscc_loop(epoch, net, device, dataloader, criterion, optimizer, snr, M,
                       denoise_lambda=0.0, tx_time=15, gamma=1.0):
     print('\nEpoch: %d' % epoch)
     net.train()
@@ -136,7 +136,7 @@ def train_deepsc_loop(epoch, net, device, dataloader, criterion, optimizer, snr,
 
 
 
-def test_deepsc_loop(net, device, dataloader, criterion, snr, M,
+def test_idjscc_loop(net, device, dataloader, criterion, snr, M,
                      denoise_lambda=0.0, tx_time=20):
     net.eval()
     test_loss = 0

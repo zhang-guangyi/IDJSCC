@@ -13,7 +13,6 @@ import random
 import numpy as np
 import torch.nn as nn
 from tqdm.auto import tqdm
-from model import DeepSCNet
 import torch.nn.init as init
 import torch.nn.functional as F
 
@@ -61,7 +60,7 @@ def _stream_is_tty(stream):
 
 
 def _get_progress_stream():
-    # deepsc_main.py wraps stdout with Logger; tqdm should write only to terminal.
+    # main.py wraps stdout with Logger; tqdm should write only to terminal.
     stream = getattr(sys.stdout, 'terminal', sys.stdout)
     if hasattr(stream, 'write'):
         return stream
@@ -413,13 +412,3 @@ class ReplayBuffer():
                 else:
                     to_return.append(element)
         return Variable(torch.cat(to_return))
-    
-
-def load_DeepSC(compression_ratio, channel='awgn'):
-    # Model
-    num_filters, compression_ratio = calculate_filters(compression_ratio)
-    print('==> Building DeepSC model.. \nThe real compression rate is %.3f || The number of filters is %d' % (compression_ratio, num_filters))
-    net = DeepSCNet(filters=num_filters, channel=channel)
-    checkpoint = torch.load(f'ckpt/ckpt-t-nc-cr{int(compression_ratio)}.pth')
-    net.load_state_dict(checkpoint['net'])
-    return net

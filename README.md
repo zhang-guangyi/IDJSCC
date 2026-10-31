@@ -4,17 +4,18 @@ This curated version keeps a minimal runnable code set for training and simulati
 Large historical checkpoints, logs and cache files were removed.
 
 ## Project Structure
-- `deepsc_main.py`: training entry.
+- `main.py`: training entry.
 - `sim_main.py`: simulation/testing entry.
-- `app_common.py`: shared initialization, CIFAR loader creation, and model factory.
+- `app_common.py`: shared initialization, CIFAR loader creation, and IDJSCC model factory.
 - `engine.py`: training/testing loops.
 - `sim_engine.py`: simulation experiment loops.
 
 The duplicated model/data setup logic from entry scripts has been merged into `app_common.py` to keep behavior consistent and code maintenance simpler.
 
+Only `InverseNet` and `InverseNetDenoise` are supported.
+
 ## Run
 1. Train Inverse model: `bash train_scripts/run.sh`
-2. Train DeepSC baseline: `bash train_scripts/run_ste.sh`
 
 ## AWGN training scripts
 

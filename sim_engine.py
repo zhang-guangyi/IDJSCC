@@ -28,7 +28,7 @@ def _batch_image_mse(outputs, targets, criterion):
     return criterion(received_image, transmitted_image).item()
 
   
-def test_deepsc_tx(net, device, dataloader, criterion, sample_num, snr, M):
+def test_idjscc_tx(net, device, dataloader, criterion, sample_num, snr, M):
     net.eval()
 
     tx_time = 30
@@ -74,12 +74,12 @@ def Experiment_1(net, device, testloader, criterion, Group_Num, Sample_Num, snr,
     torch.set_printoptions(precision=2)
     for i in range(Group_Num):
         print("Current test turn: %d" %(i))
-        PSNR += test_deepsc_tx(net, device, testloader, criterion, Sample_Num, snr, M)
+        PSNR += test_idjscc_tx(net, device, testloader, criterion, Sample_Num, snr, M)
     print('PSNR : ', torch.tensor(PSNR/Group_Num))
     exit(0)
 
 
-def test_deepsc_snr(net, device, dataloader, criterion, sample_num, snr, M):
+def test_idjscc_snr(net, device, dataloader, criterion, sample_num, snr, M):
     net.eval()
     SNRdBs = [snr]
     tx_time = 1
@@ -120,7 +120,7 @@ def Experiment_2(net, device, testloader, criterion, Group_Num, Sample_Num, snr,
     torch.set_printoptions(precision=2)
     for i in range(Group_Num):
         print("Current test turn: %d" %(i))
-        PSNR += test_deepsc_snr(net, device, testloader, criterion, Sample_Num, snr, M)
+        PSNR += test_idjscc_snr(net, device, testloader, criterion, Sample_Num, snr, M)
     np.save(f'simulation/experiment_2/PSNR.npy', PSNR/Group_Num)
     print('PSNR : ', torch.tensor(PSNR/Group_Num))
     exit(0)

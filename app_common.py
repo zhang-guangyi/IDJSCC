@@ -1,13 +1,10 @@
 import torch
-import torch.nn as nn
 import numpy as np
 import torchvision
-from functools import partial
 import torchvision.transforms as transforms
 import os
 
 from utils import calculate_filters
-from model import DeepSCNet, ViTSCNet
 from inversemodel import InverseNet, InverseNetDenoise
 
 
@@ -65,15 +62,7 @@ def build_model(
     x_min=-3.0,
     x_max=3.0,
 ):
-    if model_name.startswith('DeepSC'):
-        num_filters, real_cr = calculate_filters(compression_ratio)
-        print(
-            '==> Building model.. DeepSCNet '
-            f'\nThe real compression rate is {real_cr:.3f} || '
-            f'The number of filters is {num_filters}'
-        )
-        model = DeepSCNet(filters=num_filters, channel=channel)
-    elif model_name == 'Inverse':
+    if model_name == 'Inverse':
         num_filters, real_cr = calculate_filters(compression_ratio)
         inverse_cls = InverseNetDenoise if use_denoise else InverseNet
         model_tag = 'InverseNetDenoise' if use_denoise else 'InverseNet'
@@ -83,23 +72,6 @@ def build_model(
             f'The number of filters is {num_filters}'
         )
         model = inverse_cls(M=num_filters, channel=channel, x_min=x_min, x_max=x_max)
-    elif model_name.startswith('ViTSC'):
-        print(f'==> Building model.. ViTSC\nThe real compression rate is {compression_ratio:.3f}')
-        model = ViTSCNet(
-            compression_ratio=compression_ratio,
-            img_size=32,
-            patch_size=4,
-            encoder_embed_dim=128,
-            encoder_depth=4,
-            encoder_num_heads=6,
-            decoder_embed_dim=128,
-            decoder_depth=2,
-            decoder_num_heads=4,
-            mlp_ratio=4,
-            qkv_bias=True,
-            norm_layer=partial(nn.LayerNorm, eps=1e-6),
-            channel=channel,
-        )
     else:
         raise ValueError(f'Unknown model: {model_name}')
 

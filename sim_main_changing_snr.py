@@ -34,7 +34,7 @@ def get_args():
     parser = argparse.ArgumentParser(description='PyTorch CIFAR10 Testing')
     parser.add_argument('--test_batch_size', default=100, type=int, help='Testing batchsize')
     parser.add_argument('--resume', default='', type=str, help='Resume from checkpoint')
-    parser.add_argument('--model', default='DeepSC', type=str, help='model name')
+    parser.add_argument('--model', default='Inverse', choices=['Inverse'], type=str, help='model name')
     parser.add_argument('--channel', default='awgn', type=str, help='model name')
     parser.add_argument('--use_denoise', action='store_true', help='Use InverseNetDenoise when model is Inverse')
 

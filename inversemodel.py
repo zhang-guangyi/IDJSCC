@@ -11,7 +11,6 @@ try:
 except ModuleNotFoundError:
   # Recent geotorch versions use PyTorch's parametrization registry.
   import torch.nn.utils.parametrize as geotorch_parametrize
-from model import qam_mapper
 
 iGDN = lambda N: GDN(N, inverse=True)
 cat = lambda *x_list: torch.cat(x_list, dim=1)
