@@ -1,0 +1,5 @@
+original_path,saved_path,epoch_zero_based,mse,sha256
+outputs/idjscc_rt_cbr1_3_snr18/checkpoint-best.pth,checkpoints/ckpt-t-cr1.5-idjscc-denoise-t18db-awgn-rt-analog.pth,1756,5.0413581481361325,0c59cf3f4b490a903931b98e66da20731a0d0542e29cbf9452d56b07cb617bc5
+outputs/idjscc_rt_cbr1_4_snr18/checkpoint-best.pth,checkpoints/ckpt-t-cr2-idjscc-denoise-t18db-awgn-rt-analog.pth,1685,6.951923462461927,3d630edac859fea280d69e1ed77e590c04ee1f9c22a4bb931bd34272584eea45
+outputs/idjscc_single_cbr1_3_snr18/checkpoint-best.pth,checkpoints/ckpt-t-cr1.5-idjscc-denoise-t18db-awgn-analog.pth,1660,0.010089861232845578,923425e4256cb17bd2b0b7d424469c2b2864e9b5a871eb39b300c0d5657dbe93
+outputs/idjscc_single_cbr1_4_snr18/checkpoint-best.pth,checkpoints/ckpt-t-cr2-idjscc-denoise-t18db-awgn-analog.pth,1650,0.014960538576997352,4032f86ccad97398641a48b47423a1225fd43f065d3f9bea4752fe01ebda5c0a
