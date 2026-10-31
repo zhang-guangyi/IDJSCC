@@ -1,7 +1,9 @@
-# PyTorch implementation of [Alleviating Distortion Accumulation in Multi-Hop Semantic Communication](https://arxiv.org/pdf/2308.11126)
+# IDJSCC CIFAR10
 
-This curated version keeps a minimal runnable code set for training and simulation.
-Large historical checkpoints, logs and cache files were removed.
+Training and evaluation code for IDJSCC on CIFAR10, including single-hop
+transmission, recursive training, and multi-hop simulation over AWGN and
+Rayleigh channels. The repository includes training scripts, test scripts,
+and pretrained checkpoints.
 
 ## Project Structure
 - `main.py`: training entry.
